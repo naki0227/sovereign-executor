@@ -1,0 +1,21 @@
+[package]
+name = "executor"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Solana関連はバージョンを固定して安定させる
+solana-sdk = "1.18"
+solana-client = "1.18"
+
+# 最新の 0.13 ではなく、Solanaと共存可能な 0.11 を指定
+reqwest = { version = "0.11", features = ["json"] }
+
+# その他の必須ライブラリ
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+dotenv = "0.15"
+anyhow = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+chrono = "0.4.43"
+dirs = "6.0.0"
