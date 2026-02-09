@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package sovereign;
+
+// 執行サービス
+service Executor {
+    // 注文実行命令
+    rpc ExecuteTrade (TradeRequest) returns (TradeResponse);
+}
+
+message TradeRequest {
+    string side = 1;      // "BUY"
+    double price = 2;     // 執行時の価格
+    double expected_e = 3; // 期待値E
+}
+
+message TradeResponse {
+    bool success = 1;
+    string tx_signature = 2; // Solanaの署名
+    string message = 3;
+}
