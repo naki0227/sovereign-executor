@@ -1,123 +1,88 @@
-# Sovereign: AI駆動型 高頻度取引システム
+# 🦅 Sovereign: AIネイティブ・ソラナ・エグゼキューター
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Rust](https://img.shields.io/badge/Rust-1.75%2B-orange)](https://www.rust-lang.org/)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
+[![Gemini 3.0](https://img.shields.io/badge/AI-Gemini%203.0-blue)](https://deepmind.google/technologies/gemini/)
 [![Solana](https://img.shields.io/badge/Solana-Mainnet-green)](https://solana.com/)
 
-**[English README](./README.md)**
+**[English Ver. ->](./README.md)**
 
-Sovereignは、Solanaブロックチェーン向けに設計された、ハイブリッドアーキテクチャ採用の最先端トレーディングボットです。PythonによるAI駆動の柔軟な意思決定と、Rustによる超高速なトランザクション実行を融合させています。
+## 🤔 Sovereignとは？
 
-## 🚀 主な機能
+**Sovereign（ソブリン）は、Solanaブロックチェーン上に生息する自律型トレーディング生命体です。**
 
-*   **ハイブリッドアーキテクチャ**:
-    *   **Oracle (Python)**: 市場分析、AI推論 (Google Gemini 3)、戦略ロジックを担当。
-    *   **Executor (Rust)**: 秘密鍵管理、トランザクション署名、gRPC経由の高速RPC通信を担当。
-*   **AI統合**: Google Gemini Flashモデルを使用し、市場センチメントとテクニカル指標をリアルタイムで分析・判断。
-*   **マルチトークン対応**: SOL, USDC, USDTの残高と流動性に基づき、最適な取引ルートを動的に選択。
-*   **耐障害性と信頼性**:
-    *   **RPCフォールバック**: プライマリRPCがダウンした場合、自動的にバックアップRPC (Project Serum, Extrnode等) に切り替え。
-    *   **スマートリトライ**: ネットワークエラー時、指数バックオフ戦略を用いて再試行。
-*   **セキュリティ**: 秘密鍵はコンパイルされたRustバイナリ内で管理され、Python層やログには一切露出させません。
+これは単なる自動売買スクリプトではありません。**Google Gemini 3.0** の高度な「推論能力」と、**Rust** 言語による「超高速実行」を融合させることで、過酷な暗号資産市場を生き抜くために設計されました。
 
-## 🏗 アーキテクチャ
+例えるなら、**「24時間365日、決して眠らない熟練のヘッジファンドマネージャー」**。
+市場のわずかな変化をAIが感じ取り、Rustの強靭な肉体が瞬きする間もなく取引を執行します。
+
+---
+
+## ✨ 何が特別なのか？
+
+### 🧠 「脳」としてのAI (Gemini 3.0)
+従来のボットは「RSIが70を超えたら売る」といった単純なルールに縛られていました。
+Sovereignは違います。Gemini 3.0 を搭載することで、**市場の文脈（コンテキスト）を読む**ことができます。突発的なニュース、価格変動の質、全体の空気を総合的に判断し、人間のような柔軟さで戦略を組み立てます。
+
+### ⚡ 「筋肉」としてのRust
+どれほど優れた頭脳があっても、動きが遅ければ市場では勝てません。
+Sovereignの実行エンジン（Executor）は、Solana自体と同じ **Rust** 言語で構築されています。AIが「GO」と判断した瞬間、ミリ秒単位の速さでブロックチェーンにトランザクションを叩き込みます。これはPythonだけのボットには真似できない領域です。
+
+### 🛡️ 鉄壁の守り
+APIサーバーが落ちても、Sovereignは止まりません。
+- **自己修復ネットワーク**: 接続先（RPC）がダウンした場合、即座に別の経路を見つけて接続を維持します。
+- **マルチトークン戦略**: 手持ちがUSDCでもUSDTでもSOLでも、その場にある資金を自動で認識して戦います。
+- **セキュリティ**: 命綱である「秘密鍵」は、コンパイルされたRustバイナリの奥深くに隔離されており、外部からは見えません。
+
+---
+
+## 🏗 システム構成図
+
+このシステムは、2つの異なる種族の共生によって成り立っています。
+
+1.  **Oracle (Python) 🐍**: データを咀嚼し、Gemini 3.0と対話して戦略を練る「頭脳」。
+2.  **Executor (Rust) 🦀**: 暗号化された指令を受け取り、ブロックチェーンと直接対話する「肉体」。
 
 ```mermaid
-graph TD
-    subgraph "Python Layer (Oracle)"
-        A[Oracle.py] -->|Market Data| B(Gemini AI)
-        B -->|Sentiment Analysis| A
-        A -->|Trade Decision| C[gRPC Client]
-    end
-    
-    subgraph "Rust Layer (Executor)"
-        D[gRPC Server] -->|Receive Order| E[Transaction Builder]
-        E -->|Sign & Send| F[Solana RPC]
-    end
-    
-    C <-->|Protobuf| D
-    F -->|Confirm| E
-    E -->|Response| D
+graph LR
+    Market[暗号資産市場] -->|データ| Oracle(Oracle / Python)
+    Oracle <-->|思考・推論| AI[Gemini 3.0]
+    Oracle -->|取引命令| Executor(Executor / Rust)
+    Executor -->|トランザクション| Solana[Solana Blockchain]
 ```
 
-## 🛠 前提条件
+## 🚀 始め方 (Quick Start)
 
-*   **Rust**: `cargo` および `rustc` (最新の安定版)。
-*   **Python**: バージョン 3.10 以上。
-*   **Solana CLI**: ウォレット管理用（推奨）。
-*   **Google Gemini API Key**: AI機能の利用に必要。
+### 必要なもの
+- **Rust** & **Cargo** (エンジンを動かすため)
+- **Python 3.10+** (頭脳を動かすため)
+- **Gemini API Key** (魂を吹き込むため)
 
-## 📦 インストール手順
+### セットアップ
 
-1.  **リポジトリのクローン**
+1.  **コードの召喚**
     ```bash
     git clone https://github.com/naki0227/sovereign-executor.git
     cd sovereign-executor
-    ```
-
-2.  **Python依存関係のインストール**
-    ```bash
     pip install -r requirements.txt
     ```
 
-3.  **Rust Executorのビルド**
+2.  **エンジンの鍛造**
     ```bash
     cd executor
     cargo build --release
-    cd ..
     ```
 
-4.  **Protocol Buffersの生成**
-    `sovereign.proto` を変更した場合のみ、Python用コードを再生成する必要があります:
-    ```bash
-    python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. sovereign.proto
+3.  **魂の設定**
+    `.env` ファイルを作成し、鍵を設定します:
+    ```env
+    GEMINI_API_KEY=あなたのGeminiキー
+    SOLANA_PRIVATE_KEY=あなたの秘密鍵
     ```
 
-## ⚙️ 設定
+4.  **起動**
+    - ターミナル1: `./executor/target/release/executor`
+    - ターミナル2: `python3 oracle.py`
 
-ルートディレクトリに `.env` ファイルを作成し、以下の変数を設定してください:
+---
 
-```env
-# AI Configuration
-GEMINI_API_KEY=your_google_gemini_api_key
-
-# Solana Configuration
-SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
-SOLANA_PRIVATE_KEY=your_base58_private_key
-
-# Notification (Optional)
-DISCORD_WEBHOOK_URL=your_discord_webhook_url
-```
-
-## 🚀 使用方法
-
-### 1. Executor (Rust) の起動
-ExecutorはローカルgRPCポートで待機し、Pythonからの命令を待ち受けます。
-```bash
-./executor/target/release/executor
-```
-
-### 2. Oracle (Python) の起動
-別のターミナルで、意思決定エンジンを起動します。
-```bash
-python3 oracle.py
-```
-
-## 📂 プロジェクト構成
-
-*   `executor/`: 高性能実行エンジンのRustソースコード。
-*   `oracle.py`: 戦略とAIロジックを記述したメインPythonスクリプト。
-*   `sovereign.proto`: gRPC通信用のプロトコル定義。
-*   `scripts/`: ユーティリティスクリプト (ウォレット作成、残高確認など)。
-*   `tests/`: ユニットテストおよび統合テスト。
-*   `archive/`: 過去のログや廃止されたスクリプト。
-*   `ledger.csv`: 全取引記録をローカルに保存する台帳。
-
-## ⚠️ 免責事項
-
-本ソフトウェアは教育および実験目的で提供されています。暗号資産取引には重大な金銭的リスクが伴います。本ボットの使用によって発生したいかなる損失についても、作者は責任を負いません。自己責任でご利用ください。
-
-## 📜 ライセンス
-
-MIT License
+*“未来をつかむのは、誰よりも速く考え、誰よりも速く動く者だけだ。”*
