@@ -12,7 +12,7 @@ Sovereignは、Solanaブロックチェーン向けに設計された、ハイ�
 ## 🚀 主な機能
 
 *   **ハイブリッドアーキテクチャ**:
-    *   **Oracle (Python)**: 市場分析、AI推論 (Google Gemini 2.0)、戦略ロジックを担当。
+    *   **Oracle (Python)**: 市場分析、AI推論 (Google Gemini 3)、戦略ロジックを担当。
     *   **Executor (Rust)**: 秘密鍵管理、トランザクション署名、gRPC経由の高速RPC通信を担当。
 *   **AI統合**: Google Gemini Flashモデルを使用し、市場センチメントとテクニカル指標をリアルタイムで分析・判断。
 *   **マルチトークン対応**: SOL, USDC, USDTの残高と流動性に基づき、最適な取引ルートを動的に選択。
