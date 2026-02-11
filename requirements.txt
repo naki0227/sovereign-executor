@@ -1,0 +1,6 @@
+grpcio
+grpcio-tools
+google-generativeai
+python-dotenv
+requests
+cryptography

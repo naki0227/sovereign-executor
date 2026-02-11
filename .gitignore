@@ -1,3 +1,45 @@
-/target
-id.json
+# Rust
+target/
+**/*.rs.bk
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+
+# Environment Variables
 .env
+*.env
+.env.*
+
+# Logs
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Data & History
+ledger.csv
+trade_log.csv
+trades.csv
+*.sqlite3
+*.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Protocol Buffers (Generated Python - Keep if critical, Ignore if build-script managed)
+# keeping for now as they are checked in
+# *_pb2.py
+# *_pb2_grpc.py
+
+# Solana
+id.json

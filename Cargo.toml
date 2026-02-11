@@ -23,6 +23,7 @@ dirs = "6.0.0"
 tonic = "0.12" # 2026年現在の安定版
 prost = "0.13"
 tokio-stream = "0.1"
+magic-crypt = "3.1"
 
 [build-dependencies]
 tonic-build = "0.12"

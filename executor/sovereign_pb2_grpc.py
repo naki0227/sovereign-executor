@@ -5,7 +5,7 @@ import warnings
 
 import sovereign_pb2 as sovereign__pb2
 
-GRPC_GENERATED_VERSION = '1.71.2'
+GRPC_GENERATED_VERSION = '1.78.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -18,7 +18,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in sovereign_pb2_grpc.py depends on'
+        + ' but the generated code in sovereign_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -26,7 +26,8 @@ if _version_not_supported:
 
 
 class ExecutorStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """執行サービス
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -39,24 +40,15 @@ class ExecutorStub(object):
                 request_serializer=sovereign__pb2.TradeRequest.SerializeToString,
                 response_deserializer=sovereign__pb2.TradeResponse.FromString,
                 _registered_method=True)
-        self.EmergencyStop = channel.unary_unary(
-                '/sovereign.Executor/EmergencyStop',
-                request_serializer=sovereign__pb2.StopRequest.SerializeToString,
-                response_deserializer=sovereign__pb2.StopResponse.FromString,
-                _registered_method=True)
 
 
 class ExecutorServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """執行サービス
+    """
 
     def ExecuteTrade(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def EmergencyStop(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """注文実行命令
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -69,11 +61,6 @@ def add_ExecutorServicer_to_server(servicer, server):
                     request_deserializer=sovereign__pb2.TradeRequest.FromString,
                     response_serializer=sovereign__pb2.TradeResponse.SerializeToString,
             ),
-            'EmergencyStop': grpc.unary_unary_rpc_method_handler(
-                    servicer.EmergencyStop,
-                    request_deserializer=sovereign__pb2.StopRequest.FromString,
-                    response_serializer=sovereign__pb2.StopResponse.SerializeToString,
-            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'sovereign.Executor', rpc_method_handlers)
@@ -83,7 +70,8 @@ def add_ExecutorServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class Executor(object):
-    """Missing associated documentation comment in .proto file."""
+    """執行サービス
+    """
 
     @staticmethod
     def ExecuteTrade(request,
@@ -102,33 +90,6 @@ class Executor(object):
             '/sovereign.Executor/ExecuteTrade',
             sovereign__pb2.TradeRequest.SerializeToString,
             sovereign__pb2.TradeResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def EmergencyStop(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/sovereign.Executor/EmergencyStop',
-            sovereign__pb2.StopRequest.SerializeToString,
-            sovereign__pb2.StopResponse.FromString,
             options,
             channel_credentials,
             insecure,

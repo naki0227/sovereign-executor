@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package sovereign;
+
+service Executor {
+  rpc ExecuteTrade (TradeRequest) returns (TradeResponse);
+  rpc EmergencyStop (StopRequest) returns (StopResponse);
+}
+
+message TradeRequest {
+  string side = 1;
+  int64 amount_lamports = 2;   // ← ここが重要！
+  double price_limit = 3;
+  int64 priority_fee_lamports = 4;
+  string input_mint = 5;
+  string output_mint = 6;
+}
+
+message TradeResponse {
+  string tx_signature = 1;
+  string message = 2;
+  bool success = 3;
+}
+
+message StopRequest {
+  string reason = 1;
+}
+
+message StopResponse {
+  bool locked = 1;
+  string message = 2;
+}
