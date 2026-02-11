@@ -12,7 +12,7 @@ Sovereign is an advanced, hybrid architecture trading bot designed for the Solan
 ## 🚀 Key Features
 
 *   **Hybrid Architecture**: 
-    *   **Oracle (Python)**: Handles market analysis, AI inference (Google Gemini 2.0), and strategy logic.
+    *   **Oracle (Python)**: Handles market analysis, AI inference (Google Gemini 3), and strategy logic.
     *   **Executor (Rust)**: Handles private key management, transaction signing, and high-speed RPC communication via gRPC.
 *   **AI Integration**: Utilizes Google's Gemini Flash model to analyze market sentiment and technical indicators in real-time.
 *   **Multi-Token Support**: Dynamically routes trades through SOL, USDC, or USDT based on available balances and liquidity.
